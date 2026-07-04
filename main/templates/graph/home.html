@@ -1,0 +1,104 @@
+<!-- graph/templates/graph/plot.html -->
+{% extends "graph/base.html" %}
+{% load static %}
+
+{% block content %}
+<style>
+    .form-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 20px;
+        background-color: #f9f9f9c4;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        margin-top: 120px; 
+        padding-top: 40px;
+        margin-bottom :30px;   
+    }
+
+    h1 {
+        color: #333;
+        font-size: 1.9em;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        text-align: center;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+        width: 100%;
+        max-width: 400px;
+    }
+
+    .form-label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+        color: #333;
+    }
+
+    .form-input {
+        width: 100%;
+    }
+
+    input[type="text"], input[type="date"] {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 1em;
+    }
+
+    button {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        background-color: #007bff;
+        color: white;
+        font-size: 1em;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        margin-bottom: 30px;
+        margin-top: 10px;
+    }
+
+    button:hover {
+        background-color: #0056b3;
+    }
+
+    .graph-container {
+        margin-top: 20px;
+        width: 100%;
+        
+        
+    }
+</style>
+
+    <div class="form-container">
+        
+        <h1 ><u>Graph Of Stock Closing Prices</u></h1>
+        <br><br>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label class="form-label" for="{{ form.input_string.id_for_label }}">Ticker</label>
+                <div class="form-input">{{ form.input_string }}</div>
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="{{ form.start_date.id_for_label }}">Start Date</label>
+                <div class="form-input">{{ form.start_date }}</div>
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="{{ form.end_date.id_for_label }}">End Date</label>
+                <div class="form-input">{{ form.end_date }}</div>
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+        
+        {% if graph_html %}
+            <div style="margin-top: 20px; width: 100%; max-width: 800px;">
+                {{ graph_html|safe }}
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}
