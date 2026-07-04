@@ -39,4 +39,4 @@ QuantWeb is a web application focused on quantitative finance and analytics. It 
 
 This README provides a clear structure for new users to understand what the project is about, how to set it up locally.
 
-Last Update: 20th June, 2024
+Last Update: 20th June, 2026
